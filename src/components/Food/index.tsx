@@ -28,9 +28,11 @@ const Food: React.FC<IProps> = ({
   const [isAvailable, setIsAvailable] = useState(food.available);
 
   async function toggleAvailable(): Promise<void> {
-    api.patch(`/foods/${food.id}`, { available: !isAvailable }).then(() => {
-      setIsAvailable(!isAvailable);
-    });
+    api
+      .put(`/foods/${food.id}`, { ...food, available: !isAvailable })
+      .then(() => {
+        setIsAvailable(!isAvailable);
+      });
   }
 
   function setEditingFood(): void {
